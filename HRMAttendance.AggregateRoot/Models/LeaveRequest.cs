@@ -1,4 +1,5 @@
-﻿using HRMAttendance.DTO.DTOs;
+﻿using HRMAttendance.AggregateRoot.Validation;
+using HRMAttendance.DTO.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace HRMAttendance.AggregateRoot.Models
         public DateTime EndDate { get; set; }
         public required string Reason { get; set; }
         public required string Status { get; set; }
+
+        public static bool IsLeaveRequestValid(LeaveRequestDto dto)
+        {
+            return ModelValidator.LeaveRequestValidator(dto);
+        }
 
         // DTO Mapping methods
         public static LeaveRequestDto ToDto(LeaveRequest leaveRequest)

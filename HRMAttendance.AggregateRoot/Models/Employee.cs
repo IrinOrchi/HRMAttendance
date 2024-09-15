@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HRMAttendance.AggregateRoot.Validation;
 using HRMAttendance.DTO;
 using HRMAttendance.DTO.DTOs;
 
@@ -10,7 +12,7 @@ namespace HRMAttendance.AggregateRoot.Models
 {
     public class Employee
     {
-
+        [Key]
         public int ID { get; set; }
         public required string Name { get; set; }
         public required string Designation { get; set; }
@@ -23,6 +25,11 @@ namespace HRMAttendance.AggregateRoot.Models
         public required string Phone { get; set; }
         public DateTime DateOfBirth { get; set; }
         public virtual ICollection<LeaveRequest> LeaveRequests { get; set; }
+
+        public static bool IsEmployeeValid(EmployeeDto dto)
+        {
+            return ModelValidator.EmployeeValidator(dto);
+        }
 
         // Mapping method to DTO
         public EmployeeDto  ToDto()

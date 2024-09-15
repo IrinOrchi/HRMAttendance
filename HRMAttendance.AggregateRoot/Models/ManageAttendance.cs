@@ -1,4 +1,5 @@
-﻿using HRMAttendance.DTO.DTOs;
+﻿using HRMAttendance.AggregateRoot.Validation;
+using HRMAttendance.DTO.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace HRMAttendance.AggregateRoot.Models
         public string Status { get; set; }
         public bool IsOnLeave { get; set; }
         public DateTime AttendanceDate { get; set; }
+
+        public static bool IsManageAttendanceValid(ManageAttendanceDto dto)
+        {
+            return ModelValidator.ManageAttendanceValidator(dto);
+        }
 
         // Mapping method to DTO
         public ManageAttendanceDto ToDto()
